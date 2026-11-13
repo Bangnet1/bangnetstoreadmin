@@ -93,6 +93,25 @@ table{width:100%;border-collapse:collapse;min-width:700px}th,td{text-align:left;
   header{padding-top:env(safe-area-inset-top)}
 }
 
+
+/* Final mobile polish: viewport safety, horizontal navigation and touch behavior. */
+@media(max-width:700px){
+  html{scroll-padding-top:calc(132px + env(safe-area-inset-top))}
+  body{overflow-x:clip}
+  header{height:calc(60px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}
+  #app>.tabs{top:calc(60px + env(safe-area-inset-top));touch-action:pan-x;overscroll-behavior-x:contain}
+  main{padding-top:calc(136px + env(safe-area-inset-top))}
+  #app,#overview,.tab,.panel{min-width:0}
+  button,.btn,a{touch-action:manipulation}
+  .scroll{overscroll-behavior-x:contain;scrollbar-width:thin}
+  .manager-frame{height:calc(100dvh - 170px - env(safe-area-inset-top));max-height:900px}
+}
+@media(max-width:390px){
+  main{padding-top:calc(132px + env(safe-area-inset-top))}
+  #app>.tabs button{padding-left:11px;padding-right:11px;font-size:11px}
+  .manager-frame{height:calc(100dvh - 155px - env(safe-area-inset-top))}
+}
+
 </style></head><body>
 <header><strong>Bangnet Store · Admin</strong><button id="installApp" class="secondary hidden" type="button">Install Aplikasi</button><button id="logout" class="secondary hidden">Keluar</button></header>
 <main><section id="login" class="panel auth"><h2>Login Admin</h2><p class="muted">Masuk menggunakan akun admin Bangnet Store.</p><label>Email</label><input id="email" type="email" autocomplete="username" value="bangunwicaksono553@gmail.com"><label>Password</label><input id="password" type="password" autocomplete="current-password"><button id="loginBtn">Masuk</button><p id="loginMsg" class="muted"></p></section>
