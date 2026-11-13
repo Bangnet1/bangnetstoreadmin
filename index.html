@@ -149,6 +149,18 @@ table{width:100%;border-collapse:collapse;min-width:700px}th,td{text-align:left;
   #ordersTable .order-actions button{flex:1}
 }
 
+
+/* Inline product editor for phones: open the actual existing form below the selected item. */
+@media(max-width:700px){
+  #productInlineEditor{display:block!important;grid-column:1/-1;background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}
+  #productInlineEditor>td{display:block!important;padding:0!important;border:0!important}
+  #productInlineEditor>td:before{display:none!important}
+  #productInlineEditor .panel{margin:0 0 10px;padding:14px;border:1px solid #dce4ff;box-shadow:0 5px 18px rgba(49,91,234,.08)}
+  #productInlineEditor .panel h2{margin-bottom:12px}
+  #productInlineEditor #productForm button[type="submit"]{width:100%;margin-bottom:8px}
+  #productInlineEditor #resetProduct{width:100%}
+}
+
 </style></head><body>
 <header><strong>Bangnet Store · Admin</strong><button id="installApp" class="secondary hidden" type="button">Install Aplikasi</button><button id="logout" class="secondary hidden">Keluar</button></header>
 <main><section id="login" class="panel auth"><h2>Login Admin</h2><p class="muted">Masuk menggunakan akun admin Bangnet Store.</p><label>Email</label><input id="email" type="email" autocomplete="username" value="bangunwicaksono553@gmail.com"><label>Password</label><input id="password" type="password" autocomplete="current-password"><button id="loginBtn">Masuk</button><p id="loginMsg" class="muted"></p></section>
@@ -168,7 +180,10 @@ async function enter(){const {data:{user}}=await sb.auth.getUser();if(!user||use
 $('loginBtn').onclick=async()=>{msg('loginMsg','Memeriksa akun…');const {error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){msg('loginMsg',error.message);return}await enter()};
 $('logout').onclick=async()=>{await sb.auth.signOut();showLogin()};
 function activateTab(tab){if(!['overview','products','orders','manager'].includes(tab))tab='overview';localStorage.setItem('bangnet_admin_active_tab',tab);document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('hidden',x.id!==tab));if(tab==='manager'){const frame=document.querySelector('.manager-frame');if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'bangnet-admin-tab-active'},location.origin)}}document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>activateTab(b.dataset.tab));
-function resetProduct(){$('productForm').reset();$('productId').value='';$('pCost').value=0;$('pStock').value=0;msg('productMsg','')}
+const productFormPanel=$('productForm').closest('.panel');
+const productListPanel=productFormPanel.nextElementSibling;
+function restoreProductForm(){if(productFormPanel.parentElement!==$('products'))$('products').insertBefore(productFormPanel,productListPanel);var heading=productFormPanel.querySelector('h2');if(heading)heading.textContent='Tambah / Edit Produk';var editor=document.getElementById('productInlineEditor');if(editor)editor.remove();}
+function resetProduct(){restoreProductForm();$('productForm').reset();$('productId').value='';$('pCost').value=0;$('pStock').value=0;msg('productMsg','')}
 $('resetProduct').onclick=resetProduct;
 var productSortField='name',productSortDirection='asc';
 function renderProductRows(){
@@ -184,7 +199,13 @@ function renderProductRows(){
  document.querySelectorAll('[data-edit]').forEach(function(b){b.onclick=function(){
   var p=products.find(function(x){return String(x.id)===b.dataset.edit;});
   $('productId').value=p.id;$('pName').value=p.name;$('pCategory').value=p.category;$('pDescription').value=p.description||'';$('pPrice').value=p.price;$('pCost').value=p.cost;$('pStock').value=p.stock;$('pImage').value=p.image_url||'';
-  window.scrollTo({top:0,behavior:'smooth'});
+  if(window.matchMedia('(max-width:700px)').matches){
+   var row=b.closest('tr');var editor=document.getElementById('productInlineEditor');
+   if(!editor){editor=document.createElement('tr');editor.id='productInlineEditor';editor.className='product-inline-editor';var cell=document.createElement('td');cell.colSpan=5;editor.appendChild(cell);}
+   row.parentNode.insertBefore(editor,row.nextSibling);editor.firstElementChild.appendChild(productFormPanel);
+   var heading=productFormPanel.querySelector('h2');if(heading)heading.textContent='Edit Produk';
+   msg('productMsg','Sedang mengedit: '+p.name);
+  }else{window.scrollTo({top:0,behavior:'smooth'});}
  };});
  document.querySelectorAll('[data-delete]').forEach(function(b){b.onclick=async function(){
   if(!confirm('Hapus produk ini? Produk tidak akan dihapus dari riwayat pesanan.'))return;
