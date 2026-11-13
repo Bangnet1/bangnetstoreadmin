@@ -95,6 +95,49 @@ h2{font:800 19px 'Manrope',sans-serif;letter-spacing:-.5px;margin-top:0}
   .auth{min-height:0}
 }
 
+
+/* Mobile Manager navigation: show every module without horizontal swiping. */
+@media(max-width:700px){
+  #app>nav{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    align-items:stretch;
+    gap:6px;
+    width:100%;
+    max-width:100%;
+    height:auto;
+    max-height:none;
+    overflow:visible;
+    overflow-x:visible;
+    white-space:normal;
+    position:sticky;
+    top:0;
+    padding:8px;
+    touch-action:pan-y;
+    overscroll-behavior-x:auto;
+  }
+  #app>nav button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    min-width:0;
+    min-height:44px;
+    padding:9px 7px;
+    text-align:center;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    line-height:1.25;
+    font-size:11px;
+  }
+  #app>nav button:before{display:none}
+  #app>nav button:hover{transform:none}
+}
+@media(max-width:390px){
+  #app>nav{gap:5px;padding:7px}
+  #app>nav button{font-size:10px;padding:8px 5px;min-height:42px}
+}
+
 </style></head><body>
 <header><div><strong>Bangnet Manager</strong><div class="muted" style="color:#cbd5e1">Terintegrasi dengan Admin Bangnet Store</div></div><div class="row" style="flex:0 0 auto"><a href="./index.html" style="color:white">← Admin Store</a><button id="logout" class="secondary">Keluar</button></div></header>
 <main>
