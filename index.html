@@ -199,6 +199,14 @@ body.product-modal-open{overflow:hidden}
  .product-modal-dialog #productFormPanel form button[type="submit"],.product-modal-dialog #resetProduct{width:100%;margin:0 0 8px}
 }
 
+
+/* Compact icon-only edit action, matching the add-product control. */
+.product-edit-icon{display:inline-grid;place-items:center;width:44px;height:44px;min-width:44px;padding:0;border-radius:13px;font-size:23px;line-height:1}
+.product-edit-icon span{display:block;transform:translateY(-1px)}
+@media(max-width:700px){
+  #productsTable .product-actions .product-edit-icon{flex:0 0 48px;width:48px;min-width:48px}
+}
+
 </style></head><body>
 <header><strong>Bangnet Store · Admin</strong><button id="installApp" class="secondary hidden" type="button">Install Aplikasi</button><button id="logout" class="secondary hidden">Keluar</button></header>
 <main><section id="login" class="panel auth"><h2>Login Admin</h2><p class="muted">Masuk menggunakan akun admin Bangnet Store.</p><label>Email</label><input id="email" type="email" autocomplete="username" value="bangunwicaksono553@gmail.com"><label>Password</label><input id="password" type="password" autocomplete="current-password"><button id="loginBtn">Masuk</button><p id="loginMsg" class="muted"></p></section>
@@ -250,7 +258,7 @@ function renderProductRows(){
   return String(av||'').localeCompare(String(bv||''),'id',{numeric:true,sensitivity:'base'})*factor;
  });
  $('productRows').innerHTML=sorted.map(function(p){
-  return '<tr><td data-label="Produk">'+esc(p.name)+'</td><td data-label="Kategori">'+esc(p.category)+'</td><td data-label="Harga">'+money(p.price)+'</td><td data-label="Stok">'+p.stock+'</td><td data-label="Aksi"><div class="product-actions"><button class="secondary" data-edit="'+p.id+'">Edit</button><button class="danger" data-delete="'+p.id+'">Hapus</button></div></td></tr>';
+  return '<tr><td data-label="Produk">'+esc(p.name)+'</td><td data-label="Kategori">'+esc(p.category)+'</td><td data-label="Harga">'+money(p.price)+'</td><td data-label="Stok">'+p.stock+'</td><td data-label="Aksi"><div class="product-actions"><button type="button" class="secondary product-edit-icon" data-edit="'+p.id+'" aria-label="Edit '+esc(p.name)+'" title="Edit produk"><span aria-hidden="true">✎</span></button><button class="danger" data-delete="'+p.id+'">Hapus</button></div></td></tr>';
  }).join('');
  document.querySelectorAll('[data-edit]').forEach(function(b){b.onclick=function(){
   var p=products.find(function(x){return String(x.id)===b.dataset.edit;});
