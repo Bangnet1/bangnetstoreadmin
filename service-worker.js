@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bangnet-admin-pwa-v5';
+const CACHE_NAME = 'bangnet-admin-pwa-v6';
 const APP_SHELL = [
   './',
   './index.html',
