@@ -54,7 +54,7 @@ table{width:100%;border-collapse:collapse;min-width:700px}th,td{text-align:left;
 <div id="orders" class="tab hidden"><div class="panel"><h2>Pesanan & Verifikasi Pembayaran</h2><p class="muted">Bukti pembayaran hanya dapat dilihat oleh admin. Upload bukti tidak otomatis mengubah status menjadi diproses.</p><div class="scroll"><table><thead><tr><th>Waktu</th><th>Pelanggan</th><th>Item</th><th>Total</th><th>Status</th><th>Bukti</th><th>Tindakan</th></tr></thead><tbody id="orderRows"></tbody></table></div></div></div></section></main>
 <script type="module">
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-const URL='https://wectusglyacjqtapyvpr.supabase.co',KEY='sb_publishable_0uDuEdDgIlOFCW23e_-o9g_RadhCYus',ADMIN='bangunwicaksono553@gmail.com',ADMIN_ID='28284234-c92b-427b-aacc-68ad18a6fe1f';
+const URL='https://wectusglyacjqtapyvpr.supabase.co',KEY='sb_publishable_0uDuEdDgIlOFCW23e_-o9g_RadhCYus',ADMIN='bangunwicaksono553@gmail.com',ADMIN_ID='58310a62-39b5-409e-aabd-0820417e72cb';
 const sb=createClient(URL,KEY);const $=id=>document.getElementById(id);const money=n=>'Rp'+Number(n||0).toLocaleString('id-ID');let products=[];
 function msg(id,t){$(id).textContent=t}
 async function sessionCheck(){const {data:{session}}=await sb.auth.getSession();if(session)await enter();else showLogin()}
