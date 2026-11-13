@@ -35,6 +35,53 @@ h2{font:800 19px 'Manrope',sans-serif;letter-spacing:-.5px;margin-top:0}
 @media(max-width:700px){header{height:64px;padding:0 14px}header strong{font-size:16px}main{padding:12px 10px 24px}.panel{padding:14px;border-radius:15px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric{font-size:22px}#app{grid-template-columns:minmax(0,1fr);gap:10px}#app>.grid{grid-column:1;grid-row:2}#app>nav{grid-column:1;grid-row:1;position:sticky;top:0;flex-direction:row;overflow-x:auto;white-space:nowrap;padding:7px;border-radius:13px;gap:5px}#app>nav:before{display:none}#app>nav button{width:auto;min-width:max-content;text-align:center;padding:10px 12px;font-size:11px}#app>section.tab{grid-column:1;grid-row:3}.row>*{min-width:140px}button{min-height:40px}}
 @media(max-width:390px){.grid{grid-template-columns:1fr 1fr}.metric{font-size:20px}.row>*{min-width:100%}}
 #bulkRows td{vertical-align:middle}#bulkRows .status{white-space:nowrap}#bulkRows button{white-space:nowrap;padding:8px 10px;font-size:11px}.bulk-pending{background:#fff3d9;color:#946200}.bulk-open{background:#e9efff;color:#315bea}.bulk-sent{background:#e5f8ee;color:#16804b}.bulk-error{background:#ffe8eb;color:#a72d43}
+
+/* Mobile UX refinement: form, navigation and data-table layout only. */
+@media(max-width:700px){
+  html{scroll-padding-top:66px}
+  body{padding-bottom:env(safe-area-inset-bottom)}
+  header{height:60px;padding:0 12px;gap:8px}
+  header strong{font-size:14px;letter-spacing:-.3px}
+  header strong:before{width:30px;height:30px;margin-right:7px;border-radius:10px}
+  header .muted{font-size:10px}
+  header .row{gap:6px;flex-wrap:nowrap}
+  header .row a{font-size:11px;white-space:nowrap}
+  header button{min-height:40px;padding:8px 10px;font-size:12px}
+  main{padding:12px 10px 28px}
+  #app{gap:10px}
+  #app>.grid{gap:9px}
+  #app>.grid>.panel{min-height:94px;padding:12px;border-radius:14px;font-size:11px;line-height:1.35}
+  .metric{font-size:21px;letter-spacing:-.6px;margin-top:8px;overflow-wrap:anywhere}
+  #app>nav{top:0;z-index:12;max-width:100%;padding:7px 6px;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border:1px solid #e8ebf3;border-radius:13px;box-shadow:0 5px 18px rgba(28,39,82,.06);scrollbar-width:none}
+  #app>nav::-webkit-scrollbar{display:none}
+  #app>nav button{min-height:42px;padding:10px 12px;font-size:11px;border-radius:10px}
+  #app>section.tab{min-width:0}
+  .panel{padding:14px;border-radius:15px;margin-bottom:10px}
+  h2{font-size:17px;line-height:1.3}
+  .row{gap:8px}
+  .row>*{min-width:0;flex:1 1 100%}
+  form .row>div{min-width:0;flex-basis:100%}
+  label{display:block;font-size:12px}
+  input,select,textarea{font-size:16px;min-height:44px;padding:11px 12px;margin:5px 0 12px}
+  textarea{min-height:82px}
+  button{min-height:44px;padding:10px 13px}
+  .scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+  table{min-width:720px}
+  th,td{padding:11px 10px;font-size:12px}
+  .status{white-space:nowrap}
+  .notice{font-size:12px;line-height:1.5}
+  .auth{width:100%;max-width:440px;margin:8vh auto;padding:20px}
+}
+@media(max-width:390px){
+  main{padding-left:8px;padding-right:8px}
+  #app>.grid>.panel{padding:10px;min-height:88px}
+  .metric{font-size:19px}
+  header .row a{font-size:10px}
+}
+@media(display-mode:standalone){
+  header{padding-top:env(safe-area-inset-top)}
+}
+
 </style></head><body>
 <header><div><strong>Bangnet Manager</strong><div class="muted" style="color:#cbd5e1">Terintegrasi dengan Admin Bangnet Store</div></div><div class="row" style="flex:0 0 auto"><a href="./index.html" style="color:white">← Admin Store</a><button id="logout" class="secondary">Keluar</button></div></header>
 <main>
