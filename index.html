@@ -304,7 +304,8 @@ sessionCheck();if(new URLSearchParams(location.search).get('tab')==='manager')ac
   if('serviceWorker' in navigator){
     window.addEventListener('load',function(){
       navigator.serviceWorker.register('./service-worker.js',{scope:'./'})
-        .catch(function(error){console.warn('PWA service worker tidak dapat didaftarkan:',error);});
+        .then(function(registration){return registration.update();})
+        .catch(function(error){console.warn('PWA service worker tidak dapat diperbarui:',error);});
     });
   }
   var installButton=document.getElementById('installApp');
