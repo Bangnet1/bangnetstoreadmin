@@ -213,7 +213,51 @@ body.product-modal-open{overflow:hidden}
 .product-filter .product-category-label{margin-top:2px}
 @media(max-width:700px){.product-filter input[type="search"]{font-size:16px;min-height:48px;margin-bottom:12px}}
 
-.product-image-preview{display:flex;align-items:center;gap:12px;margin:4px 0 14px;padding:10px;border:1px solid #e1e4ed;border-radius:12px;background:#fbfcff}.product-image-preview img{display:block;width:88px;height:88px;object-fit:cover;border-radius:9px;background:#eef0f6}.product-image-preview .muted{margin:0}@media(max-width:700px){.product-image-preview img{width:76px;height:76px}}.category-manager{margin:4px 0 16px;padding:13px;border:1px solid #e6e9f2;border-radius:13px;background:#f8f9fc}.category-manager-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;font-size:13px}.category-add-row{display:flex;gap:8px;align-items:center}.category-add-row input{margin:0;min-width:0}.category-add-row button{white-space:nowrap}.category-manager-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.category-chip{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border:1px solid #e2e6f0;border-radius:20px;background:#fff;font-size:12px}.category-chip button{min-height:26px;width:26px;padding:0;border-radius:50%;background:#fff0f1;color:#b83c52;font-size:16px}.category-manager #categoryMsg{display:block;margin:7px 0 0}.category-manager #categoryMsg:empty{display:none}@media(max-width:700px){.category-add-row{align-items:stretch}.category-add-row input{font-size:16px}.category-add-row button{min-width:82px}.category-manager-heading{align-items:flex-start;flex-direction:column;gap:3px}}</style></head><body>
+.product-image-preview{display:flex;align-items:center;gap:12px;margin:4px 0 14px;padding:10px;border:1px solid #e1e4ed;border-radius:12px;background:#fbfcff}.product-image-preview img{display:block;width:88px;height:88px;object-fit:cover;border-radius:9px;background:#eef0f6}.product-image-preview .muted{margin:0}@media(max-width:700px){.product-image-preview img{width:76px;height:76px}}.category-manager{margin:4px 0 16px;padding:13px;border:1px solid #e6e9f2;border-radius:13px;background:#f8f9fc}.category-manager-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;font-size:13px}.category-add-row{display:flex;gap:8px;align-items:center}.category-add-row input{margin:0;min-width:0}.category-add-row button{white-space:nowrap}.category-manager-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.category-chip{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border:1px solid #e2e6f0;border-radius:20px;background:#fff;font-size:12px}.category-chip button{min-height:26px;width:26px;padding:0;border-radius:50%;background:#fff0f1;color:#b83c52;font-size:16px}.category-manager #categoryMsg{display:block;margin:7px 0 0}.category-manager #categoryMsg:empty{display:none}@media(max-width:700px){.category-add-row{align-items:stretch}.category-add-row input{font-size:16px}.category-add-row button{min-width:82px}.category-manager-heading{align-items:flex-start;flex-direction:column;gap:3px}}
+/* Minimalist refresh: visual-only overrides; existing behavior and data logic remain unchanged. */
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#202534;background:#f7f8fa;--ink:#202534;--muted:#7b8291;--blue:#315bea;--blue2:#315bea;--line:#e8ebf0;--card:#fff;--navy:#202534}
+body{background:#f7f8fa;color:var(--ink)}
+header{background:#fff;border-bottom:1px solid #eaedf2;backdrop-filter:none;box-shadow:none}
+header strong{font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-weight:700;letter-spacing:-.45px}
+header strong:before{background:#315bea;box-shadow:none;border-radius:10px}
+.panel{background:#fff;border:1px solid #e9edf2;border-radius:16px;box-shadow:0 1px 2px rgba(20,30,50,.025)}
+nav{background:#fff;border:1px solid #e9edf2;border-radius:16px;box-shadow:none}
+nav button{border-radius:10px;color:#626b7b;font-weight:600}
+nav button:hover{background:#f5f7fb;color:#315bea;box-shadow:none;transform:none}
+nav button.active{background:#edf2ff;color:#244bd1;box-shadow:none}
+button,.btn{border-radius:10px;background:#315bea;box-shadow:none}
+button:hover{transform:none;box-shadow:none;filter:brightness(.97)}
+button.secondary{background:#f2f4f7;color:#4e5868}
+input,select,textarea{background:#fff;border-color:#e1e6ed;border-radius:10px;box-shadow:none}
+input:focus,select:focus,textarea:focus{border-color:#8ca5f8;box-shadow:0 0 0 3px rgba(49,91,234,.09)}
+table{border-collapse:separate;border-spacing:0}
+th{background:#f8f9fb;color:#727b8b}
+.scroll{border-color:#e9edf2;border-radius:12px}
+.status{border-radius:8px}
+#overview>.grid>.panel{background:#fff!important;color:#687182!important;border-color:#e9edf2!important;box-shadow:none;min-height:132px}
+#overview>.grid>.panel:after{display:none}
+#overview>.grid>.panel .metric{color:#202534!important}
+#revenueChart{min-height:190px}
+.chart-legend{color:#7b8291}
+.status-line{background:#f7f8fa;border:1px solid #edf0f4;border-radius:10px}
+.manager-frame{border-color:#e9edf2;border-radius:14px;background:#fff}
+.product-modal-dialog{background:#f7f8fa;box-shadow:0 18px 50px rgba(20,30,50,.18)}
+.product-modal-backdrop{background:rgba(25,32,48,.42);backdrop-filter:blur(2px)}
+@media(max-width:700px){
+ body{background:#f7f8fa}
+ header{box-shadow:none}
+ nav{border-radius:12px;box-shadow:none}
+ nav button.active{background:#edf2ff;color:#244bd1}
+ #overview>.grid{gap:10px}
+ #overview>.grid>.panel{min-height:118px;padding:15px}
+ .metric{font-size:25px;letter-spacing:-.7px}
+ .panel{border-radius:14px}
+ #productsTable tbody tr,#ordersTable tbody tr{box-shadow:none;border-color:#e9edf2;border-radius:12px}
+ #productsTable tbody td:before,#ordersTable tbody td:before{color:#858d9b}
+ .manager-frame{border-radius:12px}
+}
+
+</style></head><body>
 <header><strong>Bangnet Store · Admin</strong><button id="installApp" class="secondary hidden" type="button">Install Aplikasi</button><button id="logout" class="secondary hidden">Keluar</button></header>
 <main><section id="login" class="panel auth"><h2>Login Admin</h2><p class="muted">Masuk menggunakan akun admin Bangnet Store.</p><label>Email</label><input id="email" type="email" autocomplete="username" value="bangunwicaksono553@gmail.com"><label>Password</label><input id="password" type="password" autocomplete="current-password"><button id="loginBtn">Masuk</button><p id="loginMsg" class="muted"></p></section>
 <section id="app" class="hidden"><nav class="tabs"><button data-tab="overview" class="active">Ringkasan</button><button data-tab="products">Produk & Stok</button><button data-tab="orders">Pesanan</button><button data-tab="manager">Admin</button></nav>
