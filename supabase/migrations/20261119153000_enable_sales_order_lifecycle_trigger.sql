@@ -1,0 +1,1 @@
+drop trigger if exists sales_orders_create_manager_products on public.sales_orders; create trigger sales_orders_create_manager_products after insert on public.sales_orders for each row execute function public.create_manager_products_from_store_order();
