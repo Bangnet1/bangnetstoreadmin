@@ -170,8 +170,47 @@ th{background:#f8f9fb;color:#727b8b}
  .metric{font-size:22px;letter-spacing:-.5px}
 }
 
+
+/* Dedicated Manager workspace: mobile-first full-page layout */
+.back-store-link{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 14px;border-radius:11px;background:#edf2ff;color:#315bea!important;text-decoration:none;font-weight:700;font-size:13px;white-space:nowrap}
+@media(max-width:700px){
+  html{scroll-padding-top:118px}
+  body{padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+  header{height:60px;min-height:60px;padding:0 12px;gap:8px}
+  header strong{font-size:14px;letter-spacing:-.3px}
+  header strong:before{width:30px;height:30px;margin-right:7px;border-radius:10px}
+  header>div:first-child .muted{font-size:10px!important;line-height:1.2}
+  header .row{gap:6px!important}
+  header .row a{font-size:11px}
+  header #logout{min-height:40px;padding:8px 11px;font-size:12px}
+  main{padding:12px 12px 30px}
+  #app{display:flex;flex-direction:column;gap:10px;align-items:stretch}
+  #app>.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:9px;order:0}
+  #app>nav{position:sticky;top:60px;z-index:15;display:flex;flex-direction:row;align-items:center;gap:5px;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;white-space:nowrap;padding:7px;margin:0;border-radius:13px;background:rgba(255,255,255,.97);scrollbar-width:none}
+  #app>nav::-webkit-scrollbar{display:none}
+  #app>nav:before{display:none}
+  #app>nav button{flex:0 0 auto;width:auto;min-width:max-content;min-height:42px;padding:10px 13px;text-align:center;font-size:12px}
+  #app>section.tab{width:100%;min-width:0;order:2}
+  #app>.grid .panel{min-width:0;padding:13px 12px;margin:0;font-size:12px;line-height:1.35}
+  .metric{font-size:22px;margin-top:7px}
+  .panel{padding:14px;border-radius:14px;margin-bottom:10px}
+  h2{font-size:18px}
+  .row{gap:8px}
+  .row>*{min-width:0}
+  input,select,textarea{font-size:16px;min-height:44px}
+  button,.back-store-link{touch-action:manipulation}
+  .scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{min-width:680px}
+}
+@media(max-width:380px){
+  main{padding-left:9px;padding-right:9px}
+  #app>.grid .panel{padding:11px 10px}
+  .metric{font-size:20px}
+  header strong{font-size:12px}
+  .back-store-link{padding:0 9px;font-size:11px}
+}
 </style></head><body>
-<header><div><strong>Bangnet Manager</strong><div class="muted" style="color:#cbd5e1">Terintegrasi dengan Admin Bangnet Store</div></div><div class="row" style="flex:0 0 auto"><a href="./index.html" style="color:white">← Admin Store</a><button id="logout" class="secondary">Keluar</button></div></header>
+<header><div><strong>Bangnet Manager</strong><div class="muted" style="color:#cbd5e1">Terintegrasi dengan Admin Bangnet Store</div></div><div class="row" style="flex:0 0 auto"><a class="back-store-link" href="./index.html" aria-label="Kembali ke Dashboard Store">← Dashboard Store</a><button id="logout" class="secondary">Keluar</button></div></header>
 <main>
 <section id="auth" class="panel auth hidden"><h2>Sesi admin tidak ditemukan</h2><p class="muted">Silakan masuk melalui dashboard Admin Bangnet Store terlebih dahulu.</p><button onclick="location.href='./index.html'">Ke Login Admin</button></section>
 <section id="moduleError" class="panel hidden" role="alert"><h2>Admin belum dapat dimuat</h2><p id="moduleErrorText" class="muted">Sedang memuat modul Admin…</p><button type="button" onclick="location.reload()">Muat ulang</button></section>
