@@ -1,0 +1,4 @@
+alter table public.manager_products add column if not exists source_order_id bigint, add column if not exists source_order_item_index integer;
+create unique index if not exists manager_products_source_order_item_uidx on public.manager_products(source_order_id,source_order_item_index) where source_order_id is not null and source_order_item_index is not null;
+alter table public.manager_subscriptions add column if not exists source_order_id bigint, add column if not exists source_order_item_index integer;
+create unique index if not exists manager_subscriptions_source_order_item_uidx on public.manager_subscriptions(source_order_id,source_order_item_index) where source_order_id is not null and source_order_item_index is not null;
