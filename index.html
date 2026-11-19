@@ -257,6 +257,38 @@ th{background:#f8f9fb;color:#727b8b}
  .manager-frame{border-radius:12px}
 }
 
+
+.manual-order-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.manual-order-heading h2{margin:0 0 6px}
+.manual-order-heading p{margin:0}
+.manual-order-dialog{width:min(100%,760px)}
+.manual-order-dialog .panel{margin:0;padding:20px;background:#fff}
+.manual-order-dialog h2{margin:0 48px 18px 0}
+.manual-order-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.manual-order-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.manual-order-field.full{grid-column:1/-1}
+.manual-order-field label{font-weight:650;font-size:14px}
+.manual-order-field input,.manual-order-field select{width:100%;min-height:46px;border:1px solid #d9deeb;border-radius:12px;padding:10px 12px;background:#fff;color:#20263a}
+.manual-order-items{display:grid;gap:10px}
+.manual-order-line{display:grid;grid-template-columns:minmax(0,1.6fr) 90px minmax(110px,1fr) 42px;gap:8px;align-items:end;padding:12px;border:1px solid #e6e9f1;border-radius:14px}
+.manual-order-line button{min-height:44px;padding:0}
+.manual-order-total{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:14px;background:#f0f3ff;font-weight:750}
+.manual-order-actions{display:flex;gap:10px;flex-wrap:wrap}
+.manual-order-actions button{min-height:46px}
+.manual-order-note{font-size:13px;color:#747d91}
+@media(max-width:700px){
+ .manual-order-heading{align-items:stretch}
+ .manual-order-heading>button{width:100%;min-height:48px}
+ .manual-order-dialog .panel{padding:14px}
+ .manual-order-grid{grid-template-columns:1fr}
+ .manual-order-field.full{grid-column:auto}
+ .manual-order-line{grid-template-columns:minmax(0,1fr) 76px;gap:8px}
+ .manual-order-line .mol-price{grid-column:1}
+ .manual-order-line .mol-remove{grid-column:2;grid-row:2}
+ .manual-order-actions{display:grid;grid-template-columns:1fr}
+ .manual-order-actions button{width:100%}
+}
+
 </style></head><body>
 <header><strong>Bangnet Store · Admin</strong><button id="installApp" class="secondary hidden" type="button">Install Aplikasi</button><button id="logout" class="secondary hidden">Keluar</button></header>
 <main><section id="login" class="panel auth"><h2>Login Admin</h2><p class="muted">Masuk menggunakan akun admin Bangnet Store.</p><label>Email</label><input id="email" type="email" autocomplete="username" value="bangunwicaksono553@gmail.com"><label>Password</label><input id="password" type="password" autocomplete="current-password"><button id="loginBtn">Masuk</button><p id="loginMsg" class="muted"></p></section>
@@ -264,12 +296,73 @@ th{background:#f8f9fb;color:#727b8b}
 <div id="overview" class="tab"><div style="margin:0 0 18px"><div class="muted" style="font-weight:700;letter-spacing:1.2px;text-transform:uppercase;font-size:10px">Overview / Dashboard</div><h1 style="font:800 27px Manrope,sans-serif;letter-spacing:-1px;margin:6px 0">Ringkasan Toko</h1><p class="muted" style="margin:0">Pantau performa dan aktivitas Bangnet Store hari ini.</p></div><div class="grid"><div class="panel">Total Produk<div id="mProducts" class="metric">—</div><div class="muted">Produk aktif di katalog</div></div><div class="panel">Pesanan<div id="mOrders" class="metric">—</div><div class="muted">Pesanan terbaru</div></div><div class="panel">Menunggu Verifikasi<div id="mPending" class="metric">—</div><div class="muted">Perlu pemeriksaan admin</div></div><div class="panel">Omzet pesanan selesai/dikirim<div id="mRevenue" class="metric">—</div><div class="muted" style="color:#bfc5dc">Pesanan terverifikasi</div></div></div><div class="analytics-layout" style="margin-top:18px"><div class="panel chart-card"><div class="row" style="align-items:flex-start"><div><h3>Tren Omzet</h3><p class="muted" style="margin:5px 0 0">6 bulan terakhir · berdasarkan pesanan terverifikasi</p></div><span class="status info">6 BULAN</span></div><div class="chart-legend"><span>Omzet</span><span>Aktivitas pesanan</span></div><div id="revenueChart"><p class="muted">Memuat data grafik…</p></div></div><div class="panel"><h3 style="font:800 16px Manrope,sans-serif;margin:0 0 5px">Status Pesanan</h3><p class="muted" style="margin:0 0 14px">Distribusi status dari data pesanan.</p><div id="orderStatusSummary"><p class="muted">Memuat ringkasan…</p></div></div></div><div class="panel"><h2>Catatan Operasional</h2><p class="muted">Omzet dihitung dari pesanan berstatus diproses, dikirim, dibayar, atau selesai. Periksa bukti pembayaran dan mutasi rekening sebelum mengonfirmasi pembayaran.</p></div></div>
 <div id="products" class="tab hidden"><div id="productFormModal" class="product-modal hidden" aria-hidden="true"><div class="product-modal-backdrop" data-close-product-modal></div><div class="product-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="productFormTitle"><button type="button" class="product-modal-close" id="closeProductModal" aria-label="Tutup form">×</button><div id="productFormSlot"><div class="panel" id="productFormPanel"><h2 id="productFormTitle">Tambah Produk</h2><form id="productForm"><input id="productId" type="hidden"><div class="row"><div><label>Nama produk</label><input id="pName" required maxlength="160"></div><div><label for="pCategory">Kategori</label><select id="pCategory" required><option value="">Pilih kategori</option></select></div></div><div class="category-manager"><div class="category-manager-heading"><strong>Kelola kategori</strong><span class="muted">Buat atau hapus kategori</span></div><div class="category-add-row"><input id="newCategoryName" type="text" maxlength="100" placeholder="Nama kategori baru"><button type="button" id="addCategoryBtn">Tambah</button></div><div id="categoryManagerList" class="category-manager-list"></div><p id="categoryMsg" class="muted" aria-live="polite"></p></div><label>Deskripsi</label><textarea id="pDescription" rows="2"></textarea><div class="row"><div><label>Harga (Rp)</label><input id="pPrice" type="number" min="0" required></div><div><label>Modal (Rp)</label><input id="pCost" type="number" min="0" value="0"></div><div><label>Stok</label><input id="pStock" type="number" min="0" value="0"></div></div><label for="pImageFile">Gambar produk</label><input id="pImageFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif"><p class="muted">Format JPG, PNG, WebP, atau GIF. Maksimal 5 MB.</p><div id="productImagePreviewWrap" class="product-image-preview hidden"><img id="productImagePreview" alt="Pratinjau gambar produk"><span id="productImagePreviewLabel" class="muted">Pratinjau gambar</span></div><button type="submit">Simpan Produk</button><button type="button" class="secondary" id="resetProduct">Kosongkan</button><span id="productMsg" class="muted"></span></form></div></div></div></div><div class="panel product-list-panel"><div class="product-list-heading"><h2>Daftar Produk</h2><button type="button" id="toggleProductForm" class="icon-only-button secondary" aria-label="Tambah produk" title="Tambah produk"><span aria-hidden="true">＋</span></button></div><div class="product-filter"><label for="productSearchInput">Cari produk</label><input id="productSearchInput" type="search" placeholder="Cari nama atau kategori produk..." autocomplete="off"><label for="productCategoryFilter" class="product-category-label">Filter kategori produk</label><select id="productCategoryFilter"><option value="">Semua kategori</option></select></div><div class="scroll product-table-scroll"><table id="productsTable"><thead><tr><th><button type="button" class="sort-header" data-sort-field="name">Produk <span>↕</span></button></th><th><button type="button" class="sort-header" data-sort-field="category">Kategori <span>↕</span></button></th><th><button type="button" class="sort-header" data-sort-field="price">Harga <span>↕</span></button></th><th><button type="button" class="sort-header" data-sort-field="stock">Stok <span>↕</span></button></th><th>Aksi</th></tr></thead><tbody id="productRows"></tbody></table></div></div></div>
 <div id="manager" class="tab hidden"><div class="panel"><h2>Admin</h2><p class="muted">Modul Admin dibuka di dalam dashboard ini. Sesi login admin yang sama digunakan; tidak perlu login ulang.</p><iframe class="manager-frame" src="./manager.html?embedded=1&v=20261114-6" title="Admin" loading="lazy"></iframe></div></div>
-<div id="orders" class="tab hidden"><div class="panel"><h2>Pesanan & Verifikasi Pembayaran</h2><p class="muted">Bukti pembayaran hanya dapat dilihat oleh admin. Upload bukti tidak otomatis mengubah status menjadi diproses.</p><div class="scroll order-table-scroll"><table id="ordersTable"><thead><tr><th>Waktu</th><th>Pelanggan</th><th>Item</th><th>Total</th><th>Status</th><th>Bukti</th><th>Tindakan</th></tr></thead><tbody id="orderRows"></tbody></table></div></div></div></section></main>
+<div id="orders" class="tab hidden"><div class="panel"><div class="manual-order-heading"><div><h2>Pesanan & Verifikasi Pembayaran</h2><p class="muted">Pesanan dari website dan pencatatan manual tampil dalam satu daftar.</p></div><button type="button" id="openManualOrder">＋ Pesanan Manual</button></div><p class="muted">Bukti pembayaran hanya dapat dilihat oleh admin. Upload bukti tidak otomatis mengubah status menjadi diproses.</p><div class="scroll order-table-scroll"><table id="ordersTable"><thead><tr><th>Waktu</th><th>Pelanggan</th><th>Item</th><th>Total</th><th>Status</th><th>Bukti</th><th>Tindakan</th></tr></thead><tbody id="orderRows"></tbody></table></div></div></div></section></main>
 <script type="module">
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const URL='https://wectusglyacjqtapyvpr.supabase.co',KEY='sb_publishable_0uDuEdDgIlOFCW23e_-o9g_RadhCYus',ADMIN='bangunwicaksono553@gmail.com',ADMIN_ID='58310a62-39b5-409e-aabd-0820417e72cb';
 const sb=createClient(URL,KEY);const $=id=>document.getElementById(id);const money=n=>'Rp'+Number(n||0).toLocaleString('id-ID');let products=[];
 function msg(id,t){$(id).textContent=t}
+
+function openManualOrder(){
+ let modal=$('manualOrderModal');
+ if(!modal){
+  modal=document.createElement('div');modal.id='manualOrderModal';modal.className='product-modal hidden';
+  modal.innerHTML='<div class="product-modal-backdrop" data-close-manual></div><div class="product-modal-dialog manual-order-dialog" role="dialog" aria-modal="true" aria-labelledby="manualOrderTitle"><button type="button" class="product-modal-close" data-close-manual aria-label="Tutup">×</button><div class="panel"><h2 id="manualOrderTitle">Catat Pesanan Manual</h2><form id="manualOrderForm"><div class="manual-order-grid"><div class="manual-order-field"><label for="moName">Nama pelanggan *</label><input id="moName" maxlength="160" required placeholder="Nama pelanggan"></div><div class="manual-order-field"><label for="moContact">Nomor WhatsApp / kontak</label><input id="moContact" maxlength="160" placeholder="08xxxxxxxxxx"></div><div class="manual-order-field full"><label>Produk yang dipesan *</label><div id="manualOrderItems" class="manual-order-items"></div><button type="button" class="secondary" id="addManualOrderItem">＋ Tambah Produk</button><div class="manual-order-note">Harga dapat disesuaikan untuk transaksi manual. Stok akan divalidasi kembali saat pesanan disimpan.</div></div><div class="manual-order-field"><label for="moStatus">Status pesanan</label><select id="moStatus"><option value="menunggu_konfirmasi">Menunggu konfirmasi</option><option value="menunggu_pembayaran">Menunggu pembayaran</option><option value="terjual">Terjual</option><option value="diproses">Diproses</option><option value="dikirim">Dikirim</option><option value="dibayar">Dibayar</option><option value="selesai">Selesai</option></select></div><div class="manual-order-field"><label>Total pesanan</label><div class="manual-order-total"><span>Total</span><strong id="moTotal">Rp0</strong></div></div><div class="manual-order-field full"><div class="manual-order-actions"><button type="submit" id="saveManualOrder">Simpan Pesanan & Kurangi Stok</button><button type="button" class="secondary" data-close-manual>Batal</button></div><p id="manualOrderMessage" class="muted" aria-live="polite"></p></div></div></form></div></div>';
+  document.body.appendChild(modal);
+  modal.querySelectorAll('[data-close-manual]').forEach(b=>b.addEventListener('click',()=>closeManualOrder()));
+  $('addManualOrderItem').onclick=()=>addManualOrderLine();
+  $('manualOrderForm').onsubmit=saveManualOrder;
+ }
+ $('manualOrderMessage').textContent='';
+ $('moName').value='';$('moContact').value='';$('moStatus').value='menunggu_konfirmasi';
+ $('manualOrderItems').innerHTML='';addManualOrderLine();
+ modal.classList.remove('hidden');document.body.classList.add('product-modal-open');$('moName').focus();
+}
+function closeManualOrder(){const modal=$('manualOrderModal');if(modal){modal.classList.add('hidden');document.body.classList.remove('product-modal-open')}}
+function addManualOrderLine(){
+ const wrap=$('manualOrderItems');if(!wrap)return;
+ const available=products.filter(p=>!p.archived&&Number(p.stock)>0);
+ if(!available.length){msg('manualOrderMessage','Tidak ada produk aktif dengan stok tersedia. Tambahkan stok produk terlebih dahulu.');return}
+ const line=document.createElement('div');line.className='manual-order-line';
+ line.innerHTML='<div class="manual-order-field"><label>Produk</label><select class="mol-product" required><option value="">Pilih produk</option>'+available.map(p=>'<option value="'+p.id+'" data-price="'+Number(p.price)+'" data-stock="'+Number(p.stock)+'">'+esc(p.name)+' · stok '+Number(p.stock)+'</option>').join('')+'</select></div><div class="manual-order-field"><label>Jumlah</label><input class="mol-qty" type="number" min="1" step="1" value="1" required></div><div class="manual-order-field mol-price"><label>Harga satuan (Rp)</label><input class="mol-unit-price" type="number" min="0" step="1" required></div><button type="button" class="danger mol-remove" aria-label="Hapus item">×</button>';
+ wrap.appendChild(line);
+ const select=line.querySelector('.mol-product'),qty=line.querySelector('.mol-qty'),price=line.querySelector('.mol-unit-price');
+ select.onchange=()=>{const opt=select.selectedOptions[0];price.value=opt&&opt.dataset.price||'';qty.max=opt&&opt.dataset.stock||'';updateManualOrderTotal()};
+ [qty,price].forEach(input=>input.addEventListener('input',updateManualOrderTotal));
+ line.querySelector('.mol-remove').onclick=()=>{line.remove();updateManualOrderTotal()};
+}
+function updateManualOrderTotal(){
+ const total=Array.from(document.querySelectorAll('.manual-order-line')).reduce((sum,line)=>sum+(Math.max(0,Number(line.querySelector('.mol-qty').value)||0)*Math.max(0,Number(line.querySelector('.mol-unit-price').value)||0)),0);
+ $('moTotal').textContent=money(total);
+}
+async function saveManualOrder(e){
+ e.preventDefault();
+ const lines=Array.from(document.querySelectorAll('.manual-order-line'));
+ const items=[];
+ for(const line of lines){
+  const select=line.querySelector('.mol-product'),qty=Number(line.querySelector('.mol-qty').value),price=Number(line.querySelector('.mol-unit-price').value);
+  const product=products.find(p=>String(p.id)===select.value);
+  if(!product||!Number.isSafeInteger(qty)||qty<1||!Number.isSafeInteger(price)||price<0){msg('manualOrderMessage','Lengkapi produk, jumlah, dan harga dengan benar.');return}
+  if(qty>Number(product.stock)){msg('manualOrderMessage','Stok "'+product.name+'" saat ini hanya '+product.stock+'.');return}
+  items.push({product_id:Number(product.id),quantity:qty,unit_price:price});
+ }
+ if(!items.length){msg('manualOrderMessage','Tambahkan minimal satu produk.');return}
+ const total=items.reduce((sum,item)=>sum+item.quantity*item.unit_price,0);
+ if(!Number.isSafeInteger(total)||total<0){msg('manualOrderMessage','Total pesanan tidak valid.');return}
+ const button=$('saveManualOrder');button.disabled=true;msg('manualOrderMessage','Memeriksa stok dan menyimpan pesanan…');
+ const {data,error}=await sb.rpc('admin_create_manual_order',{
+  p_customer_name:$('moName').value.trim(),
+  p_customer_contact:$('moContact').value.trim()||null,
+  p_items:items,
+  p_status:$('moStatus').value
+ });
+ button.disabled=false;
+ if(error){msg('manualOrderMessage','Pesanan belum tersimpan: '+error.message);return}
+ closeManualOrder();await Promise.all([loadProducts(),loadOrders()]);
+ alert('Pesanan manual #'+data+' berhasil dicatat. Stok produk telah diperbarui.');
+}
+$('openManualOrder').addEventListener('click',openManualOrder);
+
 async function sessionCheck(){const {data:{session}}=await sb.auth.getSession();if(session)await enter();else showLogin()}
 function showLogin(){$('login').classList.remove('hidden');$('app').classList.add('hidden');$('logout').classList.add('hidden')}
 async function enter(){const {data:{user}}=await sb.auth.getUser();if(!user||user.email?.toLowerCase()!==ADMIN||user.id!==ADMIN_ID){await sb.auth.signOut();msg('loginMsg','Akun ini tidak memiliki hak admin.');showLogin();return} $('login').classList.add('hidden');$('app').classList.remove('hidden');$('logout').classList.remove('hidden');const savedTab=localStorage.getItem('bangnet_admin_active_tab');const validTab=['overview','products','orders','manager'];activateTab(validTab.includes(savedTab)?savedTab:'overview');await Promise.all([loadProducts(),loadOrders()])}
