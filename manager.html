@@ -360,11 +360,11 @@ const {createClient}=await import('https://cdn.jsdelivr.net/npm/@supabase/supaba
 const embedded=new URLSearchParams(location.search).get('embedded')==='1';if(embedded)document.body.classList.add('embedded');
 const sb=createClient('https://wectusglyacjqtapyvpr.supabase.co','sb_publishable_0uDuEdDgIlOFCW23e_-o9g_RadhCYus');
 const ADMIN='bangunwicaksono553@gmail.com', $=id=>document.getElementById(id);
+const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
 let UID=null,user=null,products=[],catalog=[],templates=[],customers=[],selected=[],sales=[],saleItems=[],payments=[],cashEntries=[],expenses=[],productSalesEvents=[],bulkConsentReady=false;
 let reportRefreshInFlight=false,reportAutoMonth=today().slice(0,7);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>'Rp'+Number(n||0).toLocaleString('id-ID');
-const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
 const addDays=(date,n)=>{const [y,m,d]=date.split('-').map(Number);return new Date(Date.UTC(y,m-1,d+n)).toISOString().slice(0,10)};
 const days=date=>Math.round((new Date(date+'T00:00:00')-new Date(today()+'T00:00:00'))/86400000);
 const fmt=d=>new Date(d+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});
