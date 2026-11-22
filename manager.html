@@ -209,6 +209,105 @@ th{background:#f8f9fb;color:#727b8b}
   header strong{font-size:12px}
   .back-store-link{padding:0 9px;font-size:11px}
 }
+
+/* Mobile layout correction: compact header, visible module navigation, and reminder cards. */
+@media(max-width:700px){
+  header{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:center;
+    gap:7px;
+    height:60px;
+    min-height:60px;
+    padding:0 10px;
+  }
+  header>div:first-child{min-width:0}
+  header>div:first-child .muted{display:none!important}
+  header strong{display:flex;align-items:center;white-space:nowrap;font-size:13px;letter-spacing:-.35px}
+  header strong:before{flex:0 0 30px}
+  header .row{display:flex;flex:0 0 auto;flex-wrap:nowrap;gap:5px!important;min-width:0}
+  header .back-store-link{
+    min-width:68px;
+    min-height:38px;
+    padding:0 8px;
+    font-size:0;
+    border-radius:9px;
+  }
+  header .back-store-link:after{content:'← Store';font-size:11px}
+  header #logout{min-width:58px;min-height:38px;padding:7px 9px;font-size:11px;border-radius:9px}
+  main{padding:10px 10px 28px}
+  #app{gap:9px}
+  #app>nav{
+    position:relative;
+    top:auto;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:5px;
+    padding:7px;
+    border-radius:12px;
+    overflow:visible;
+    white-space:normal;
+  }
+  #app>nav button{
+    width:100%;
+    min-width:0;
+    min-height:40px;
+    padding:7px 4px;
+    font-size:10.5px;
+    line-height:1.2;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    text-align:center;
+  }
+  #app>.grid{gap:8px}
+  #app>.grid .panel{min-height:82px;padding:11px 10px;font-size:11px}
+  #app>.grid .metric{font-size:21px;margin-top:5px}
+  #app>section.tab{order:2}
+  #reminders .panel{padding:13px 11px}
+  #reminders .row{display:grid;grid-template-columns:minmax(0,1fr);gap:2px}
+  #reminders .row>div{min-width:0;width:100%}
+  #reminders .scroll{overflow:visible;border:0}
+  #reminders table{width:100%;min-width:0;border-collapse:separate;border-spacing:0 8px}
+  #reminders thead{display:none}
+  #reminders tbody{display:block;width:100%}
+  #reminders tbody tr{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) 30px;
+    align-items:center;
+    gap:8px;
+    padding:11px;
+    margin:0 0 8px;
+    border:1px solid #e8ebf0;
+    border-radius:12px;
+    background:#fff;
+  }
+  #reminders tbody td{
+    display:block;
+    min-width:0;
+    padding:0;
+    border:0;
+    font-size:12px;
+    line-height:1.4;
+    overflow-wrap:anywhere;
+  }
+  #reminders tbody td:nth-child(1){grid-column:3;grid-row:1;justify-self:end}
+  #reminders tbody td:nth-child(2){grid-column:1/3;grid-row:1;font-weight:700}
+  #reminders tbody td:nth-child(3){grid-column:1/4;grid-row:2;color:#687184}
+  #reminders tbody td:nth-child(4){grid-column:1;grid-row:3;color:#687184}
+  #reminders tbody td:nth-child(4):before{content:'Jatuh tempo: ';font-weight:700;color:#454d5c}
+  #reminders tbody td:nth-child(5){grid-column:2;grid-row:3;text-align:right;font-weight:700;color:#315bea}
+  #reminders tbody td input[type=checkbox]{width:20px;height:20px;min-height:20px;margin:0;accent-color:#315bea}
+  #reminders #selectAll{width:20px;height:20px;min-height:20px}
+  #reminders #prepareBatch{width:100%}
+  #reminders #batchPreview{overflow-wrap:anywhere}
+}
+@media(max-width:380px){
+  header{padding-left:8px;padding-right:8px}
+  header strong{font-size:12px}
+  header .back-store-link{min-width:62px}
+  header #logout{min-width:54px}
+  #app>nav button{font-size:10px;min-height:38px}
+}
 </style></head><body>
 <header><div><strong>Bangnet Manager</strong><div class="muted" style="color:#cbd5e1">Terintegrasi dengan Admin Bangnet Store</div></div><div class="row" style="flex:0 0 auto"><a class="back-store-link" href="./index.html" aria-label="Kembali ke Dashboard Store">← Dashboard Store</a><button id="logout" class="secondary">Keluar</button></div></header>
 <main>
